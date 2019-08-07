@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>大事件-文章</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+  <link rel="stylesheet" href="./assets/css/prism.css">
+</head>
+
+<body>
+  <div class="header">
+    <a href="#" class="logo fl"><img src="assets/images/logo.png" alt="logo"></a>
+    <div class="search_form fl">
+      <input type="text" class="search_txt" placeholder="黑洞照片">
+      <button class="search_btn"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="link_info fr">
+      <a href="#"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;网站地图</a><br>
+      <a href="#"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;招聘信息</a>
+    </div>
+  </div>
+
+  <div class="menu_con">
+    <div class="menu">
+      <div class="menu_collapse fl">
+        <a href="javascript:;" class="level_one"><i class="fa fa-list-ul"></i>全部分类</a>
+        <ul class="level_two">
+          <li class="up"></li>
+          <!-- 导航栏 -->
+        </ul>
+      </div>
+      <ul class="left_menu fl">
+        <!-- 导航栏 -->
+      </ul>
+      <ul class="right_menu fr">
+        <li><a href="#">科技专题</a></li>
+        <li><a href="#">财经专题</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main_con clearfix">
+    <div class="left_con setfr">
+      <!-- 文章内容 -->
+      <div class="article_links">
+        <!-- 上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
+        下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a> -->
+      </div>
+
+      <form action="" class="comment_form">
+        <div class="form_group">
+          <label>用户名：</label>
+          <input type="text" name="name" placeholder="请输入用户名" class="comment_name">
+        </div>
+        <div class="form_group">
+          <label>评论内容：</label>
+          <textarea placeholder="请发表您的评论" name="content" class="comment_input"></textarea>
+        </div>
+        <div class="form_group">
+          <input type="submit" name="" value="评 论" class="comment_sub">
+        </div>
+      </form>
+
+      <!-- 评论 -->
+    </div>
+    <div class="right_con setfl">
+      <div class="common_wrap">
+        <h3><i class="fa fa-bar-chart"></i> 一周热门排行</h3>
+        <ul class="content_list">
+          <!-- 热门排行 -->
+        </ul>
+      </div>
+      <div class="common_wrap">
+        <h3><i class="fa fa-commenting-o"></i> 最新评论</h3>
+        <ul class="content_list comment_list">
+          <li>
+            <span>山</span>
+            <b><em>山治</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>丽</span>
+            <b><em>丽丽</em> 9个月前(08-14)说:9个月前(08-14)说:9个月前(08-14)说:</b>
+            <strong>挺会玩的挺会玩的挺会玩的挺会玩的</strong>
+          </li>
+          <li>
+            <span>R</span>
+            <b><em>Rechael</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>J</span>
+            <b><em>John</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>段</span>
+            <b><em>段正淳</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+          <li>
+            <span>乔</span>
+            <b><em>乔峰</em> 9个月前(08-14)说:</b>
+            <strong>挺会玩的</strong>
+          </li>
+        </ul>
+      </div>
+      <div class="common_wrap">
+        <h3><i class="fa fa-bullseye"></i> 焦点关注</h3>
+        <ul class="content_list guanzhu_list">
+          <!-- 焦点关注 -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer clearfix">
+    <div class="foot_link">
+      <a href="#">关于我们</a>
+      <span>|</span>
+      <a href="#">联系我们</a>
+      <span>|</span>
+      <a href="#">招聘人才</a>
+      <span>|</span>
+      <a href="#">友情链接</a>
+    </div>
+    <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
+    <p>电话：0755-****888 粤ICP备*******8号</p>
+  </div>
+
+  <!-- ----------------------------------------------------js部分 -->
+  <script src="./assets/js/jquery-1.12.4.min.js"></script>
+  <script src="./assets/js/template-web.js"></script>
+
+  <!-- ---------------------------------------------导航栏部分 -->
+  <!-- 定义模板引擎 -->
+  <script id="tempMenu" type="text/html">
+        {{each arr}}
+        <li><a href="./list.html?id={{$value.id}}">{{$value.name}}</a></li>
+        {{/each}}
+    </script>
+  <!-- 发送get请求到/getCategory接口获取分类数据 -->
+  <script>
+    $.get('/getCategory', function (res) {
+      var str = template('tempMenu', {
+        arr: res
+      });
+      $('.left_menu').html(str);
+      $('.level_two').append(str);
+    }, 'json');
+  </script>
+
+  <!-- ---------------------------------------------一周热门排行 -->
+  <!-- 定义模板引擎 -->
+  <script id="tempHot" type="text/html">
+        {{each arr}}
+        <li>
+            {{if $index == 0}}
+            <span class="first">
+            {{else if $index == 1}}
+            <span class="second">
+            {{else if $index == 2}}
+            <span class="third">
+            {{else}}
+            <span>
+            {{/if}}
+                {{$index + 1}}
+            </span>
+            <a href="./detail.html?id={{$value.id}}">{{$value.desc}}</a>
+        </li>
+        {{/each}}
+    </script>
+  <!-- 发送get请求到/getArticles接口获取热门排行内容 -->
+  <script>
+    $.get('/getArticles', { flag: 'click', num: 7 }, function (res) {
+      var str = template('tempHot', {
+        arr: res.data
+      })
+      $('.content_list').eq(0).html(str);
+    }, 'json');
+  </script>
+
+  <!-- ------------------------------------------焦点关注部分 -->
+  <!-- 定义模板引擎 -->
+  <script id="tempAttention" type="text/html">
+        {{each arr}}
+        <li><a href="./detail.html?id={{$value.id}}">{{$value.desc}}</a></li>
+        {{/each}}
+    </script>
+  <!-- 发送get请求到/getArticles接口获取焦点关注内容 -->
+  <script>
+    $.get('/getArticles', { flag: 'bad', num: 7 }, function (res) {
+      var str = template('tempAttention', {
+        arr: res.data
+      })
+      $('.guanzhu_list').html(str);
+    }, 'json');
+  </script>
+
+  <!-- ----------------------------------------------文章详情部分 -->
+  <!-- 定义模板引擎 -->
+  <script id="tempContent" type="text/html">
+        <div class="breadcrumb">
+            当前位置： <a href="./index.html">首页</a> &gt; <a href="./list.html?id={{arr2.id}}">{{arr2.name}}</a> &gt; 文章详情
+        </div>
+        <h3 class="article_title">{{arr1.title}}</h3>
+        <div class="article_info">
+            杰克 发布于 {{arr1.addtime}}&nbsp;&nbsp;&nbsp;
+            分类: {{arr2.name}}&nbsp;&nbsp;&nbsp;
+            阅读:({{arr1.click}})&nbsp;&nbsp;&nbsp;
+            评论: (0)
+        </div>
+        <div class="article_con">{{@arr1.text}}</div>
+    </script>
+  <!-- 发送get请求到/getArticleById接口,根据文章id，获取一篇文章 -->
+  <script>
+    var dataId = location.search;
+    $.get('/getArticleById' + dataId, function (res) {
+      var str = template('tempContent', {
+        arr1: res.data,
+        arr2: res.category
+      })
+      $('.article_links').before(str);
+      $('<script>').attr('src', "./assets/js/prism.js").appendTo('body')
+    }, 'json');
+  </script>
+
+  <!-- ----------------------------------------------获取上一篇下一篇文章 -->
+  <!-- 定义模板引擎 -->
+  <script id="tempPN" type="text/html">
+        上一篇： <a href="./detail.html?id={{arr_prev.id}}">{{arr_prev.title}}</a> <br>
+        下一篇： <a href="./detail.html?id={{arr_next.id}}">{{arr_next.title}}</a>
+    </script>
+  <!-- 发送get请求到/adjacent接口,根据文章id，获取上下篇文章 -->
+  <script>
+    $.get('/adjacent' + dataId, function (res) {
+      var str = template('tempPN', {
+        arr_prev: res.data.prev,
+        arr_next: res.data.next
+      })
+      $('.article_links').append(str);
+    }, 'json');
+  </script>
+
+
+  <!-- ---------------------------------------------获取文章评论 -->
+  <!-- 定义模板 -->
+  <script id="tempComment" type="text/html">
+    <div class="comment_count">{{count}}条评论</div>
+    {{each arr}}
+      <div class="comment_list_con">
+        <div class="comment_detail_list">
+          <div class="person_pic fl">孙</div>
+          <div class="name_time fl"><b>{{$value.name}}</b><span>{{$value.addtime}}</span></div>
+          <div class="comment_text fl">{{$value.content}}</div>
+        </div>
+      </div>
+    {{/each}}
+  </script>
+  <!-- 发送Ajax请求到 /getCommentsByArticleId接口，获取文章的评论-->
+  <script>
+    // 获取文章的ID
+    var id = location.search.replace(/\D/g, '');
+    $.get('/getCommentsByArticleId', { articleid: id }, function (res) {
+      var str = template('tempComment', {
+        arr: res.data,
+        count: res.count
+      })
+      $('.left_con').append(str);
+    }, 'json');
+  </script>
+
+  <!-- -----------------------------------------------发布评论 -->
+  <script>
+    // $('.comment_sub').click(function (e) {
+    //   e.preventDefault();
+    //   var fd = new FormData($('.comment_form')[0]);
+    //   fd.append('articleid', id);
+    //   // console.log(fd.get('articleid'));
+    //   // console.log(fd.get('name'));
+    //   // console.log(fd.get('content'));
+    //   $.ajax({
+    //     type: 'post',
+    //     url: '/addComment',
+    //     data: fd,
+    //     dataType: 'json',
+    //     success: function (res) {
+    //       alert(res.message);
+    //       if (res.code == 200) {
+    //         $('.comment_name').val('');
+    //         $('.comment_input').val('');
+    //       }
+    //     },
+    //     contentType: false,
+    //     processData: false
+    //   });
+    // });
+
+
+    $('.comment_sub').click(function (e) {
+      e.preventDefault();
+      var data = $('.comment_form').serialize();
+      data += '&articleid=' + id;
+      $.post('/addComment', data, function (res) {
+        alert(res.message);
+        if(res.code == 200){
+          $('.comment_name').val('');
+          $('.comment_input').val('');
+        }
+      }, 'json');
+    });
+  </script>
+</body>
+
+</html>
